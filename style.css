@@ -26,6 +26,15 @@ nav {
     font-family: "Silkscreen", sans-serif;
     margin-top: 10px;
     margin-bottom: 40px;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+nav ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
 }
 
 h1 {
