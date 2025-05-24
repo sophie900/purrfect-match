@@ -59,6 +59,8 @@ h1 {
     color: var(--black);
     background-color: var(--yellow);
     font-family: "Silkscreen", sans-serif;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .swipe-button:hover {
