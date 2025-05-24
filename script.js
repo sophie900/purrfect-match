@@ -25,23 +25,11 @@ function resetRotation(element_id) {
     card.style.transform = "rotate(0deg)";
 }
 
-// Fades current card element
+// Hides an element
 function toggle(element_id) {
     card = document.getElementById(element_id);
     // card.style.opacity = "0";
-    // card.style.display = "none";
-    let op = 1;  // initial opacity
-    var timer = setInterval(function () {
-        if (op <= 0.1){
-            clearInterval(timer);
-            card.style.display = "none";
-            card.style.opacity = 1;
-        }
-        card.style.opacity = op;
-        card.style.filter = 'alpha(opacity=' + op * 100 + ")";
-        op -= op * 0.2;
-    }, 50);
-
+    card.style.display = "none";
 }
 
 // When buttons are hovered, the card should rotate
