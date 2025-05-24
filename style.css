@@ -63,9 +63,16 @@ h1 {
 
 .swipe-button:hover {
     cursor: pointer;
+    background-color: var(--dark-yellow);
 }
 
 #button-container {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+#tabs {
+    color: var(--yellow);
+    font-size: 20px
+    
 }
