@@ -34,14 +34,24 @@ function toggle(element_id) {
     // card.style.display = "none";
     let op = 1; // initial opacity
     var timer = setInterval(function () {
-        if (op <= 0.1) {
+        if (op <= 0.005) {
             clearInterval(timer);
-            card.style.display = "none";
+            // card.style.display = "none";
             card.style.opacity = 1;
         }
         card.style.opacity = op;
         card.style.filter = "alpha(opacity=" + op * 100 + ")";
-        op -= op * 0.2;
+        op -= op * 0.25;
+    }, 50);
+
+    // generate new card information and then make it reappear
+    var timer1 = setInterval(function () {
+        if (op >= 1) {
+            clearInterval(timer1);
+        }
+        card.style.opacity = op;
+        card.style.filter = "alpha(opacity=" + op * 100 + ")";
+        op += op * 0.25;
     }, 50);
 }
 
@@ -66,7 +76,7 @@ function generateCard(data) {
     data.forEach((item) => {
         const dataItem = document.createElement("div");
         dataItem.classList.add("data-item");
-        dataItem.textContext = `${item.id}\n${item.photo}\nBreed: ${item.breed}\nGender: ${item.gender}\nAge: ${item.age}`;
+        dataItem.textContent = `${item.id}\n${item.photo}\nBreed: ${item.breed}\nGender: ${item.gender}\nAge: ${item.age}`;
         dataContainer.appendChild(dataItem);
     });
 }
