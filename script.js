@@ -1,5 +1,7 @@
 var current_id = 1;
 var max_id = 10;
+var cards = [];
+var liked = [];
 
 function rotate(element_id, direction) {
     card = document.getElementById(element_id);
@@ -91,8 +93,11 @@ function generateCard(name, age, breed, gender, photo) {
     `;
 
     card.innerHTML = html_string;
+    cards.push(html_string);
 
-    likes.innerHTML += html_string;
+    if (liked[current_id - 2]) {
+        likes.innerHTML += cards[current_id - 2];
+    }
 }
 
 // When buttons are hovered, the card should rotate
@@ -103,6 +108,9 @@ function configureButtons(element_id) {
     leftSwipeButton.addEventListener("mouseout", () =>
         resetRotation(element_id)
     );
+    leftSwipeButton.addEventListener("click", () => 
+        liked.push(false)
+    );
 
     const rightSwipeButton = document.getElementById("right-swipe-button");
 
@@ -111,6 +119,9 @@ function configureButtons(element_id) {
     );
     rightSwipeButton.addEventListener("mouseout", () =>
         resetRotation(element_id)
+    );
+    rightSwipeButton.addEventListener("click", () => 
+        liked.push(true)
     );
 }
 configureButtons("current-card");
