@@ -1,4 +1,4 @@
-var current_id = 1
+var current_id = 5;
 
 function rotate(element_id, direction) {
     card = document.getElementById(element_id);
@@ -32,39 +32,40 @@ function toggle(element_id) {
     card = document.getElementById(element_id);
     // card.style.opacity = "0";
     // card.style.display = "none";
-    let op = 1;  // initial opacity
+    let op = 1; // initial opacity
     var timer = setInterval(function () {
-        if (op <= 0.1){
+        if (op <= 0.1) {
             clearInterval(timer);
             card.style.display = "none";
             card.style.opacity = 1;
         }
         card.style.opacity = op;
-        card.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        card.style.filter = "alpha(opacity=" + op * 100 + ")";
         op -= op * 0.2;
     }, 50);
-
 }
 
 function fetchData() {
-    fetch(`http://127.0.0.1:5000/data?id=${current_id}`)
-    .then(response => response.json())
-    .then(data => {
-        generateCard(data);
-        current_id++
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error)
-    });
+    fetch(`http://127.0.0.1:5000/data/${current_id}`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            generateCard(data);
+            current_id++;
+        })
+        .catch((error) => {
+            console.error("Error fetching data:", error);
+        });
 }
+fetchData();
 
 // Generates card information
 function generateCard(data) {
-    const dataContainer = document.getElementById('data-container');
-    dataContainer.innerHTML = '';
-    data.forEach(item => {
-        const dataItem = document.createElement('div');
-        dataItem.classList.add('data-item');
+    const dataContainer = document.getElementById("data-container");
+    dataContainer.innerHTML = "";
+    data.forEach((item) => {
+        const dataItem = document.createElement("div");
+        dataItem.classList.add("data-item");
         dataItem.textContext = `${item.id}\n${item.photo}\nBreed: ${item.breed}\nGender: ${item.gender}\nAge: ${item.age}`;
         dataContainer.appendChild(dataItem);
     });
