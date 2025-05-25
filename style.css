@@ -103,8 +103,10 @@ h6 {
 
 .start-button {
     color: var(--black);
+    background-color: var(--yellow);
     font-family: "Silkscreen", sans-serif;
-    text-align: center;
+    margin-left: 100%;
+    margin-right: 100%;
 }
 
 #button-container {
@@ -115,5 +117,4 @@ h6 {
 #tabs {
     color: var(--yellow);
     font-size: 20px
-    
 }
