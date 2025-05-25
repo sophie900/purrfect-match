@@ -1,3 +1,5 @@
+var current_id = 1
+
 function rotate(element_id, direction) {
     card = document.getElementById(element_id);
     if (direction == "left") {
@@ -44,14 +46,26 @@ function toggle(element_id) {
 
 }
 
+function fetchData() {
+    fetch('http://127.0.0.1:5000/data?' + current_id)
+    .then(response => response.json())
+    .then(data => {
+        generateCard(data);
+        current_id++
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error)
+    });
+}
+
 // Generates card information
-function generateCard() {
+function generateCard(data) {
     const dataContainer = document.getElementById('data-container');
     dataContainer.innerHTML = '';
-    dataContainer.forEach(item => {
+    data.forEach(item => {
         const dataItem = document.createElement('div');
         dataItem.classList.add('data-item');
-        dataItem.textContext = '${item.id}\n${item.photo}\nBreed: ${item.breed}\nGender: ${item.gender}\nAge: ${item.age}';
+        dataItem.textContext = `${item.id}\n${item.photo}\nBreed: ${item.breed}\nGender: ${item.gender}\nAge: ${item.age}`;
         dataContainer.appendChild(dataItem);
     });
 }
