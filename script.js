@@ -27,6 +27,15 @@ function resetRotation(element_id) {
     card.style.transform = "rotate(0deg)";
 }
 
+function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function executeAfterTimer() {
+    await delay(3500);
+    updateCard();
+}
+
 // Fades current card element
 function toggle(element_id) {
     card = document.getElementById(element_id);
@@ -44,6 +53,8 @@ function toggle(element_id) {
         op -= op * 0.25;
     }, 50);
 
+    executeAfterTimer();
+
     // generate new card information and then make it reappear
     var timer1 = setInterval(function () {
         if (op >= 1) {
@@ -53,8 +64,6 @@ function toggle(element_id) {
         card.style.filter = "alpha(opacity=" + op * 100 + ")";
         op += op * 0.25;
     }, 50);
-
-    updateCard();
 
     current_id++;
 }
@@ -124,3 +133,6 @@ function configureButtons(element_id) {
     );
 }
 configureButtons("current-card");
+
+// Update card to first card on page load
+updateCard();
