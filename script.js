@@ -44,6 +44,18 @@ function toggle(element_id) {
 
 }
 
+// Generates card information
+function generateCard() {
+    const dataContainer = document.getElementById('data-container');
+    dataContainer.innerHTML = '';
+    dataContainer.forEach(item => {
+        const dataItem = document.createElement('div');
+        dataItem.classList.add('data-item');
+        dataItem.textContext = '${item.id}\n${item.photo}\nBreed: ${item.breed}\nGender: ${item.gender}\nAge: ${item.age}';
+        dataContainer.appendChild(dataItem);
+    });
+}
+
 // When buttons are hovered, the card should rotate
 function configureButtons(element_id) {
     const leftSwipeButton = document.getElementById("left-swipe-button");
