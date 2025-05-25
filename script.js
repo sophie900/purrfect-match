@@ -1,4 +1,5 @@
 var current_id = 1;
+var max_id = 10;
 
 function rotate(element_id, direction) {
     card = document.getElementById(element_id);
@@ -31,39 +32,18 @@ function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function executeAfterTimer() {
-    await delay(3500);
-    updateCard();
+async function executeAfterTimer(card) {
+    await delay(1000);
+    updateCard(); // Update card
+    card.style.opacity = "1"; // Make card reappear
 }
 
 // Fades current card element
 function toggle(element_id) {
     card = document.getElementById(element_id);
-    // card.style.opacity = "0";
-    // card.style.display = "none";
-    let op = 1; // initial opacity
-    var timer = setInterval(function () {
-        if (op <= 0.005) {
-            clearInterval(timer);
-            // card.style.display = "none";
-            card.style.opacity = 1;
-        }
-        card.style.opacity = op;
-        card.style.filter = "alpha(opacity=" + op * 100 + ")";
-        op -= op * 0.25;
-    }, 50);
+    card.style.opacity = "0"; // Make card disappear
 
-    executeAfterTimer();
-
-    // generate new card information and then make it reappear
-    var timer1 = setInterval(function () {
-        if (op >= 1) {
-            clearInterval(timer1);
-        }
-        card.style.opacity = op;
-        card.style.filter = "alpha(opacity=" + op * 100 + ")";
-        op += op * 0.25;
-    }, 50);
+    executeAfterTimer(card);
 
     current_id++;
 }
@@ -73,13 +53,23 @@ function updateCard() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data["name"]);
-            generateCard(
-                data["name"],
-                data["age"],
-                data["breed"],
-                data["gender"],
-                data["photo"]
-            );
+            if (current_id <= max_id) {
+                generateCard(
+                    data["name"],
+                    data["age"],
+                    data["breed"],
+                    data["gender"],
+                    data["photo"]
+                );
+            } else {
+                generateCard(
+                    "No more cats to display!",
+                    "None",
+                    "None",
+                    "None",
+                    ""
+                );
+            }
             current_id++;
         })
         .catch((error) => {
@@ -90,16 +80,13 @@ function updateCard() {
 function generateCard(name, age, breed, gender, photo) {
     const card = document.getElementById("current-card");
     card.innerHTML = `
-    
-    <h1>${name}</h1>
-    <h2><img src="${photo}" alt="Next" width="250"/></a></li></h2>
-    <h3>Breed: ${breed}</h3>
-    <h4>Gender: ${gender}</h4>
-    <h5>Age: ${age}</h5>
-    <div id="data-container"></div>
-    
-    
-    `;
+        <h1>${name}</h1>
+        <h2><img src="${photo}" alt="No image available" width="250"/></a></li></h2>
+        <h3>Breed: ${breed}</h3>
+        <h4>Gender: ${gender}</h4>
+        <h5>Age: ${age}</h5>
+        <div id="data-container"></div>
+        `;
 }
 
 // Generates card information
