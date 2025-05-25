@@ -11,18 +11,36 @@
     <body>
         <nav>
             <ul>
-                <li><a id="tabs" class="active" href="index.html">Swiping</a></li>
-                <li><a id ="tabs" class="active" href="liked.html" style="text-decoration:none">Liked</a></li>
-                <li><a id ="tabs" class="active" href="welcome.html" style="text-decoration:none">Home</a></li>
+                <li>
+                    <a id="tabs" class="active" href="index.html">Swiping</a>
+                </li>
+                <li>
+                    <a
+                        id="tabs"
+                        class="active"
+                        href="index.html#liked-cards"
+                        style="text-decoration: none"
+                        >Liked</a
+                    >
+                </li>
+                <li>
+                    <a
+                        id="tabs"
+                        class="active"
+                        href="welcome.html"
+                        style="text-decoration: none"
+                        >Home</a
+                    >
+                </li>
             </ul>
         </nav>
 
         <div id="current-card" class="card">
             <h1>Cat Name</h1>
-            <h2><img src="photo-placeholder.png" alt="Next" width="250"/></h2>
-            <h3>Breed: </h3>
-            <h4>Gender: </h4>
-            <h5>Age: </h5>
+            <h2><img src="photo-placeholder.png" alt="Next" width="250" /></h2>
+            <h3>Breed:</h3>
+            <h4>Gender:</h4>
+            <h5>Age:</h5>
             <div id="data-container"></div>
         </div>
 
@@ -32,17 +50,29 @@
                 id="left-swipe-button"
                 onclick="toggle('current-card')"
             >
-                <img src="icons8-close-window-32.png" alt="Next" width="50" height="50"/>
+                <img
+                    src="icons8-close-window-32.png"
+                    alt="Next"
+                    width="50"
+                    height="50"
+                />
             </button>
 
             <button
                 class="swipe-button"
                 id="right-swipe-button"
-                onclick= "toggle('current-card')"
+                onclick="toggle('current-card')"
             >
-                <img src="icons8-pixel-heart-48.png" alt="Heart" width="50" height="50"/>
+                <img
+                    src="icons8-pixel-heart-48.png"
+                    alt="Heart"
+                    width="50"
+                    height="50"
+                />
             </button>
         </div>
+
+        <div id="liked-cards"></div>
 
         <script src="script.js"></script>
     </body>

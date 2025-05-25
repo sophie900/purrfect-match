@@ -79,14 +79,20 @@ function updateCard() {
 // Generates the information on the card
 function generateCard(name, age, breed, gender, photo) {
     const card = document.getElementById("current-card");
-    card.innerHTML = `
-        <h1>${name}</h1>
-        <h2><img src="${photo}" alt="No image available" width="250"/></a></li></h2>
-        <h3>Breed: ${breed}</h3>
-        <h4>Gender: ${gender}</h4>
-        <h5>Age: ${age}</h5>
-        <div id="data-container"></div>
-        `;
+    const likes = document.getElementById("liked-cards");
+
+    html_string = `
+    <h1>${name}</h1>
+    <h2><img src="${photo}" alt="No image available" width="250"/></a></li></h2>
+    <h3>Breed: ${breed}</h3>
+    <h4>Gender: ${gender}</h4>
+    <h5>Age: ${age}</h5>
+    <div id="data-container"></div>
+    `;
+
+    card.innerHTML = html_string;
+
+    likes.innerHTML += html_string;
 }
 
 // When buttons are hovered, the card should rotate
