@@ -44,8 +44,6 @@ function toggle(element_id) {
     card.style.opacity = "0"; // Make card disappear
 
     executeAfterTimer(card);
-
-    current_id++;
 }
 
 function updateCard() {
