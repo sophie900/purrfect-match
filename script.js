@@ -1,4 +1,4 @@
-var current_id = 5;
+var current_id = 1;
 
 function rotate(element_id, direction) {
     card = document.getElementById(element_id);
@@ -53,33 +53,57 @@ function toggle(element_id) {
         card.style.filter = "alpha(opacity=" + op * 100 + ")";
         op += op * 0.25;
     }, 50);
+
+    updateCard();
+
+    current_id++;
 }
 
-function fetchData() {
+function updateCard() {
     fetch(`http://127.0.0.1:5000/data/${current_id}`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-            generateCard(data);
+            console.log(data["name"]);
+            generateCard(
+                data["name"],
+                data["age"],
+                data["breed"],
+                data["gender"],
+                data["photo"]
+            );
             current_id++;
         })
         .catch((error) => {
             console.error("Error fetching data:", error);
         });
 }
-fetchData();
+
+function generateCard(name, age, breed, gender, photo) {
+    const card = document.getElementById("current-card");
+    card.innerHTML = `
+    
+    <h1>${name}</h1>
+    <h2><img src="${photo}" alt="Next" width="250"/></a></li></h2>
+    <h3>Breed: ${breed}</h3>
+    <h4>Gender: ${gender}</h4>
+    <h5>Age: ${age}</h5>
+    <div id="data-container"></div>
+    
+    
+    `;
+}
 
 // Generates card information
-function generateCard(data) {
-    const dataContainer = document.getElementById("data-container");
-    dataContainer.innerHTML = "";
-    data.forEach((item) => {
-        const dataItem = document.createElement("div");
-        dataItem.classList.add("data-item");
-        dataItem.textContent = `${item.id}\n${item.photo}\nBreed: ${item.breed}\nGender: ${item.gender}\nAge: ${item.age}`;
-        dataContainer.appendChild(dataItem);
-    });
-}
+// function generateCard(data) {
+//     const dataContainer = document.getElementById("data-container");
+//     dataContainer.innerHTML = "";
+//     data.forEach((item) => {
+//         const dataItem = document.createElement("div");
+//         dataItem.classList.add("data-item");
+//         dataItem.textContent = `${item.id}\n${item.photo}\nBreed: ${item.breed}\nGender: ${item.gender}\nAge: ${item.age}`;
+//         dataContainer.appendChild(dataItem);
+//     });
+// }
 
 // When buttons are hovered, the card should rotate
 function configureButtons(element_id) {
