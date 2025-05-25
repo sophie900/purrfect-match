@@ -47,7 +47,7 @@ function toggle(element_id) {
 }
 
 function fetchData() {
-    fetch('http://127.0.0.1:5000/data?' + current_id)
+    fetch(`http://127.0.0.1:5000/data?id=${current_id}`)
     .then(response => response.json())
     .then(data => {
         generateCard(data);
