@@ -28,10 +28,10 @@ function resetRotation(element_id) {
     card.style.transform = "rotate(0deg)";
 }
 
+// Updates and makes card reappear after it fades out
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
 async function executeAfterTimer(card) {
     await delay(1000);
     updateCard(); // Update card
@@ -46,6 +46,7 @@ function toggle(element_id) {
     executeAfterTimer(card);
 }
 
+// Update information on card to the next cat's data
 function updateCard() {
     fetch(`http://127.0.0.1:5000/data/${current_id}`)
         .then((response) => response.json())
@@ -75,6 +76,7 @@ function updateCard() {
         });
 }
 
+// Generates the information on the card
 function generateCard(name, age, breed, gender, photo) {
     const card = document.getElementById("current-card");
     card.innerHTML = `
@@ -86,18 +88,6 @@ function generateCard(name, age, breed, gender, photo) {
         <div id="data-container"></div>
         `;
 }
-
-// Generates card information
-// function generateCard(data) {
-//     const dataContainer = document.getElementById("data-container");
-//     dataContainer.innerHTML = "";
-//     data.forEach((item) => {
-//         const dataItem = document.createElement("div");
-//         dataItem.classList.add("data-item");
-//         dataItem.textContent = `${item.id}\n${item.photo}\nBreed: ${item.breed}\nGender: ${item.gender}\nAge: ${item.age}`;
-//         dataContainer.appendChild(dataItem);
-//     });
-// }
 
 // When buttons are hovered, the card should rotate
 function configureButtons(element_id) {
